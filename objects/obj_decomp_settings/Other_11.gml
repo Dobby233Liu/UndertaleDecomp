@@ -29,7 +29,11 @@ array_push(categories, new menu_category("Battle", "General Battle Settings",
 		new menu_slider_option("Heart Fracture Delay", "DemoHeartFractureDelay", "Delay amount (in ms) for the heart fracture", global.decomp_vars.DemoHeartFractureDelay, 500, 250, 1000, 1, 10)
 	]));
 
-
+array_push(categories, new menu_category("World", "General World Settings",
+	[
+		new menu_checkbox_option("Run with X", "EnableRunning", "Move faster by holding X", global.decomp_vars.EnableRunning, true),
+		new menu_checkbox_option("Auto Run", "EnableAutoRun", "Run by default. Hold X to walk", global.decomp_vars.EnableAutoRun, false),
+	]));
 
 
 

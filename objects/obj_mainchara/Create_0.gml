@@ -1,3 +1,10 @@
+// DECOMP
+
+decomp_runmod_expectedxlast = 0;
+decomp_runmod_expectedylast = 0;
+
+// VANILLA
+
 scr_depth(0, 0, 0, 0, 0)
 if (FL_TruePacifist == true)
 {

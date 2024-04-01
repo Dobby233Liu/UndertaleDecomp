@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"decomp_runmod",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"decomp_runmod",
+  "parent":{
+    "name":"RunMod",
+    "path":"folders/Scripts/Decomp/RunMod.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

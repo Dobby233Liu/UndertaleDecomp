@@ -15,7 +15,9 @@ global.decomp_vars = {
 	RemoveBattleIconRandomness : false,
 	BattleIconRandomOverride : 0,
 	FixInputLatency : true,
-	WristProtector : true
+	WristProtector : true,
+	EnableRunning : true,
+	EnableAutoRun : false
 }
 
 #macro trace show_debug_message

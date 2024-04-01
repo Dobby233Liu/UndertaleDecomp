@@ -1,7 +1,8 @@
 if (active == true)
 {
     global.border = 3
-    FL_InBattle = true
+    // FL_InBattle = true // Vanilla?
+	FL_InBattle = false // Decomp - fixes a weird issue
     FL_TypeHeartTransition = HeartTransitionType.QuickBattle
     FL_QuickBattleType = QuickBattleType.UndyneSpear
     SCR_BORDERSETUP()

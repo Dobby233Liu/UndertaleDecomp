@@ -3,6 +3,17 @@
 if (view_get_visible(7))
 	return;
 
+var decomp_runmod_mod = decomp_runmod_get();
+
+if (decomp_runmod_expectedxlast != xprevious || decomp_runmod_expectedylast != yprevious)
+{
+	// Something doesn't line up, might be a good idea to walk normally for this frame
+	decomp_runmod_mod = 1;
+}
+
+var decomp_xlast = x;
+var decomp_ylast = y;
+
 //
 
 if (global.facing == Direction.Down)
@@ -46,6 +57,16 @@ if obj_time.left
             x -= 2
         else
             x -= 3
+					
+		if (decomp_runmod_mod == 2)
+		{
+			// Repeat the last step from the perspective of the *new* x
+	        if (xprevious == x)
+	            x -= 2
+	        else
+	            x -= 3
+		}
+			
         if (moving != true)
             image_index = 1
         moving = true
@@ -54,7 +75,7 @@ if obj_time.left
             if keyboard_check(vk_backspace)
                 x -= 5
         }
-        image_speed = 0.2
+        image_speed = 0.2 * decomp_runmod_mod
         if (obj_time.up && global.facing == Direction.Up)
             turned = 0
         if (obj_time.down && global.facing == Direction.Down)
@@ -68,7 +89,7 @@ if obj_time.up
     if (movement == 1)
     {
         turned = 1
-        y -= 3
+        y -= 3 * decomp_runmod_mod
         if (global.debug == true)
         {
             if keyboard_check(vk_backspace)
@@ -77,7 +98,7 @@ if obj_time.up
         if (moving != true)
             image_index = 1
         moving = true
-        image_speed = 0.2
+        image_speed = 0.2 * decomp_runmod_mod
         if (obj_time.right && global.facing == Direction.Right)
             turned = 0
         if (obj_time.left && global.facing == Direction.Left)
@@ -97,13 +118,23 @@ if obj_time.right
                 x += 2
             else
                 x += 3
+			
+			if (decomp_runmod_mod == 2)
+			{
+				// Repeat the last step from the perspective of the *new* x
+		        if (xprevious == x)
+		            x += 2
+		        else
+		            x += 3
+			}
+			
             if (global.debug == true)
             {
                 if keyboard_check(vk_backspace)
                     x += 5
             }
             moving = true
-            image_speed = 0.2
+            image_speed = 0.2 * decomp_runmod_mod
             if (moving != true)
                 image_index = 1
             if (obj_time.up && global.facing == Direction.Up)
@@ -122,7 +153,7 @@ if obj_time.down
         if (obj_time.up == 0)
         {
             turned = 1
-            y += 3
+            y += 3 * decomp_runmod_mod
             if (global.debug == true)
             {
                 if keyboard_check(vk_backspace)
@@ -131,7 +162,7 @@ if obj_time.down
             if (moving != true)
                 image_index = 1
             moving = true
-            image_speed = 0.2
+            image_speed = 0.2 * decomp_runmod_mod
             if (obj_time.right && global.facing == Direction.Right)
                 turned = 0
             if (obj_time.left && global.facing == Direction.Left)
@@ -145,11 +176,37 @@ if control_check_pressed(InteractButton)
     event_user(0)
 if control_check_pressed(MenuButton)
     event_user(2)
-with (collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, obj_doorparent, 0, 0))
-    event_user(9)
+if (decomp_runmod_mod == 1)
+{
+	// Vanilla (or not running)
+	with (collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, obj_doorparent, 0, 0))
+	    event_user(9)
+}
+else
+{
+	// Decomp
+	// Would door collision trigger without the extra movement from running?
+	var xdiff = (x - decomp_xlast) / decomp_runmod_mod;
+	var ydiff = (y - decomp_ylast) / decomp_runmod_mod;
+	var collision = collision_rectangle(bbox_left - xdiff, bbox_top - ydiff, bbox_right - xdiff, bbox_bottom - ydiff, obj_doorparent, 0, 0);
+	
+	if (collision != noone)
+	{
+		// Okay, then do it
+		with (collision)
+			event_user(9);
+	}
+	else
+	{
+		// Doors shouldn't trigger from extra movement alone
+	}
+}
 if (instance_exists(obj_battler) == false)
 {
     scr_depth()
     if (FL_HaveUmbrella == true && dsprite == spr_maincharad_umbrella)
         depth = (50000 - ((y * 10) + 300))
 }
+
+decomp_runmod_expectedxlast = x;
+decomp_runmod_expectedylast = y;

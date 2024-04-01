@@ -45,7 +45,7 @@ if (moving == false)
 if (global.interact == 0)
 {
     if (moving == true && obj_decomp_console.random_encounters)
-        global.encounter += 1
+        global.encounter += 1 * decomp_runmod_get()
 }
 if (cutscene == false)
 {
