@@ -6495,6 +6495,7 @@
     {"id":{"name":"ts_watertiles_2","path":"tilesets/ts_watertiles_2/ts_watertiles_2.yy",},},
     {"id":{"name":"ts_watertiles_supplement","path":"tilesets/ts_watertiles_supplement/ts_watertiles_supplement.yy",},},
     {"id":{"name":"ts_watertiles","path":"tilesets/ts_watertiles/ts_watertiles.yy",},},
+    {"id":{"name":"cmd_give_item","path":"scripts/cmd_give_item/cmd_give_item.yy",},},
   ],
   "resourceType":"GMProject",
   "resourceVersion":"2.0",

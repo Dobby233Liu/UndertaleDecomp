@@ -16,6 +16,7 @@ command_register("hp_set", "Sets your hp", [ "value" ]);
 command_register("stfu", "Stops all Audio");
 command_register("create_fake_trophy", "Creates a fake trophy (for debug)", [ "icon_index", "text" ]);
 command_register("gold_set", "Sets your gold", [ "value" ]);
+command_register("give_item", "Adds an item to your inventory based on its name or numerical ID.", [ "itemID" ]);
 command_register("game_crash", "Crashes the game");
 
 command_register("clear", "Clears the output");
@@ -46,5 +47,13 @@ for (var i = 0; i < room_last; i++)
 array_sort(roomNameHints, true);
 
 command_register_param_hints("room_goto", "roomName", roomNameHints);
+
+var itemNameHints = array_create(0);
+for (var i = 1; i < array_length(global.decomp_cmd_give_items_id_name_map); i++)
+	itemNameHints[i] = global.decomp_cmd_give_items_id_name_map[i];
+
+array_sort(itemNameHints, true);
+
+command_register_param_hints("give_item", "itemID", itemNameHints);
 
 #endregion

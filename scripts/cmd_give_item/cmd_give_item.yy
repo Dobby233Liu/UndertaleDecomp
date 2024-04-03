@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"cmd_give_item",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"cmd_give_item",
+  "parent":{
+    "name":"Commands",
+    "path":"folders/Scripts/Decomp/Console/Commands.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
